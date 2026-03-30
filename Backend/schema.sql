@@ -1,0 +1,22 @@
+CREATE TABLE Ingredient (
+    Id INT PRIMARY KEY IDENTITY(1, 1),
+    Name NVARCHAR(255) NOT NULL,
+    Price DECIMAL(9, 2) NOT NULL,
+    Quantity DECIMAL(9, 2) NOT NULL
+);
+
+CREATE TABLE Meal (
+    Id INT PRIMARY KEY IDENTITY(1, 1),
+    Name NVARCHAR(255) NOT NULL,
+    Servings INT NOT NULL
+);
+
+CREATE TABLE MealIngredient (
+    Id INT PRIMARY KEY IDENTITY(1, 1),
+    IngredientId INT NOT NULL,
+    MealId INT NOT NULL,
+    QuantityUsed DECIMAL(9, 2) NOT NULL,
+
+    CONSTRAINT FK_Ingredient FOREIGN KEY (IngredientId) REFERENCES Ingredient(Id),
+    CONSTRAINT FK_Meal FOREIGN KEY (MealId) REFERENCES Meal(Id)
+);
