@@ -1,1 +1,4 @@
-﻿Console.WriteLine("Hello, World!");
+﻿using CLI.UI;
+
+var textUI = new TextUI();
+textUI.Run();
