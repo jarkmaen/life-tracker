@@ -34,7 +34,8 @@ CREATE TABLE MealIngredient (
     QuantityUsed DECIMAL(9, 2) NOT NULL,
 
     FOREIGN KEY (IngredientId) REFERENCES Ingredient(Id),
-    FOREIGN KEY (MealId) REFERENCES Meal(Id)
+    FOREIGN KEY (MealId) REFERENCES Meal(Id),
+    UNIQUE (IngredientId, MealId)
 );
 
 CREATE TABLE Mineral (

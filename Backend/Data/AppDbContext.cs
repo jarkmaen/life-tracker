@@ -20,17 +20,18 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Macro>().HasIndex(m => m.IngredientId).IsUnique();
+        modelBuilder.Entity<MealIngredient>().HasIndex(mI => new { mI.IngredientId, mI.MealId }).IsUnique();
         modelBuilder.Entity<Mineral>().HasIndex(m => m.IngredientId).IsUnique();
         modelBuilder.Entity<Vitamin>().HasIndex(v => v.IngredientId).IsUnique();
 
         modelBuilder.Entity<MealIngredient>()
-            .HasOne(m => m.Ingredient)
+            .HasOne(mI => mI.Ingredient)
             .WithMany()
-            .HasForeignKey(m => m.IngredientId);
+            .HasForeignKey(mI => mI.IngredientId);
 
         modelBuilder.Entity<MealIngredient>()
-            .HasOne(m => m.Meal)
+            .HasOne(mI => mI.Meal)
             .WithMany(m => m.MealIngredients)
-            .HasForeignKey(m => m.MealId);
+            .HasForeignKey(mI => mI.MealId);
     }
 }
