@@ -8,4 +8,5 @@ public class MealIngredient
     public decimal QuantityUsed { get; set; }
 
     public Ingredient Ingredient { get; set; } = null!;
+    public Meal Meal { get; set; } = null!;
 }
