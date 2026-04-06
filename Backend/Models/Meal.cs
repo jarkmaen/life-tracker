@@ -6,8 +6,8 @@ public class Meal
 {
     public int Id { get; set; }
 
-    [Required]
     [MaxLength(255)]
+    [Required]
     public string Name { get; set; } = string.Empty;
 
     public int Servings { get; set; }
