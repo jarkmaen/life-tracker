@@ -1,4 +1,5 @@
-﻿using Backend.Models;
+﻿using Backend.DTOs;
+using Backend.Models;
 using Backend.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,9 +10,9 @@ namespace Backend.Controllers;
 public class IngredientsController(IIngredientService ingredientService) : ControllerBase
 {
     [HttpPost]
-    public async Task<ActionResult<Ingredient>> Create(Ingredient ingredient)
+    public async Task<ActionResult<Ingredient>> Create(IngredientCreateDto dto)
     {
-        var createdIngredient = await ingredientService.AddAsync(ingredient);
+        var createdIngredient = await ingredientService.AddAsync(dto);
 
         return CreatedAtAction(nameof(GetById), new { id = createdIngredient.Id }, createdIngredient);
     }

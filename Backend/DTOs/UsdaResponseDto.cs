@@ -1,12 +1,12 @@
 ﻿namespace Backend.DTOs;
 
-public class FoodNutrient
+public class UsdaFoodNutrient
 {
     public decimal Amount { get; set; }
-    public Nutrient Nutrient { get; set; } = null!;
+    public UsdaNutrient Nutrient { get; set; } = null!;
 }
 
-public class Nutrient
+public class UsdaNutrient
 {
     public int Id { get; set; }
     public string UnitName { get; set; } = string.Empty;
@@ -14,5 +14,5 @@ public class Nutrient
 
 public class UsdaResponseDto
 {
-    public List<FoodNutrient> FoodNutrients { get; set; } = [];
+    public List<UsdaFoodNutrient> FoodNutrients { get; set; } = [];
 }

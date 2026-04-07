@@ -1,13 +1,85 @@
-﻿using Backend.Data;
+﻿using Backend.Constants;
+using Backend.Data;
+using Backend.DTOs;
 using Backend.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Services;
 
-public class IngredientService(AppDbContext context) : IIngredientService
+public class IngredientService(AppDbContext context, IUsdaService usdaService) : IIngredientService
 {
-    public async Task<Ingredient> AddAsync(Ingredient ingredient)
+    public async Task<Ingredient> AddAsync(IngredientCreateDto dto)
     {
+        var data = await usdaService.GetByIdAsync(dto.UsdaId);
+
+        decimal? FindNutrient(Nutrient n) => data?.FoodNutrients.FirstOrDefault(x => x.Nutrient.Id == n.UsdaId)?.Amount;
+
+        decimal chlorideFactor = 0.6066m;
+        decimal sodiumFactor = 0.3934m;
+        decimal? k1 = FindNutrient(Nutrients.VitaminK1);
+        decimal? k1D = FindNutrient(Nutrients.VitaminK1Dihydro);
+        decimal? k2 = FindNutrient(Nutrients.VitaminK2);
+        decimal? vitaminK = null;
+
+        if (k1 != null || k1D != null || k2 != null)
+        {
+            vitaminK = (k1 ?? 0) + (k1D ?? 0) + (k2 ?? 0);
+        }
+
+        var ingredient = new Ingredient
+        {
+            Energy = dto.Energy,
+            Name = dto.Name,
+            Price = dto.Price,
+            Quantity = dto.Quantity,
+            Macro = new Macro
+            {
+                AlphaLinolenicAcid = FindNutrient(Nutrients.AlphaLinolenicAcid),
+                Carbohydrate = dto.Carbohydrate,
+                Fat = dto.Fat,
+                Fiber = dto.Fiber,
+                LinoleicAcid = FindNutrient(Nutrients.LinoleicAcid),
+                Protein = dto.Protein,
+                SaturatedFat = dto.SaturatedFat,
+                Sugar = dto.Sugar
+            },
+            Mineral = new Mineral
+            {
+                Calcium = FindNutrient(Nutrients.Calcium),
+                Chloride = dto.Salt * chlorideFactor,
+                Chromium = null,
+                Copper = FindNutrient(Nutrients.Copper),
+                Fluoride = FindNutrient(Nutrients.Fluoride),
+                Iodine = null,
+                Iron = FindNutrient(Nutrients.Iron),
+                Magnesium = FindNutrient(Nutrients.Magnesium),
+                Manganese = FindNutrient(Nutrients.Manganese),
+                Molybdenum = null,
+                Phosphorus = FindNutrient(Nutrients.Phosphorus),
+                Potassium = FindNutrient(Nutrients.Potassium),
+                Selenium = FindNutrient(Nutrients.Selenium),
+                Sodium = dto.Salt * sodiumFactor,
+                Zinc = FindNutrient(Nutrients.Zinc)
+            },
+            Vitamin = new Vitamin
+            {
+                Biotin = null,
+                Choline = FindNutrient(Nutrients.Choline),
+                Folate = FindNutrient(Nutrients.Folate),
+                Niacin = FindNutrient(Nutrients.Niacin),
+                PantothenicAcid = FindNutrient(Nutrients.PantothenicAcid),
+                Riboflavin = FindNutrient(Nutrients.Riboflavin),
+                Thiamin = FindNutrient(Nutrients.Thiamin),
+                VitaminA = FindNutrient(Nutrients.VitaminA),
+                VitaminB12 = FindNutrient(Nutrients.VitaminB12),
+                VitaminB6 = FindNutrient(Nutrients.VitaminB6),
+                VitaminC = FindNutrient(Nutrients.VitaminC),
+                VitaminD = FindNutrient(Nutrients.VitaminD),
+                VitaminE = FindNutrient(Nutrients.VitaminE),
+                VitaminK = vitaminK
+            }
+        };
+
         context.Ingredients.Add(ingredient);
         await context.SaveChangesAsync();
 
