@@ -13,7 +13,7 @@ CREATE TABLE Macro (
     Carbohydrate DECIMAL(9, 2) NOT NULL,
     Fat DECIMAL(9, 2) NOT NULL,
     Fiber DECIMAL(9, 2) NOT NULL,
-    LinolenicAcid DECIMAL(9, 2),
+    LinoleicAcid DECIMAL(9, 2),
     Protein DECIMAL(9, 2) NOT NULL,
     SaturatedFat DECIMAL(9, 2) NOT NULL,
     Sugar DECIMAL(9, 2) NOT NULL,

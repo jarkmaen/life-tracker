@@ -11,5 +11,5 @@ public class Macro
     public decimal SaturatedFat { get; set; }
     public decimal Sugar { get; set; }
     public decimal? AlphaLinolenicAcid { get; set; }
-    public decimal? LinolenicAcid { get; set; }
+    public decimal? LinoleicAcid { get; set; }
 }
