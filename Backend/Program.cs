@@ -13,8 +13,10 @@ builder.Services.AddCors(options =>
     });
 });
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddHttpClient();
 builder.Services.AddOpenApi();
 builder.Services.AddScoped<IIngredientService, IngredientService>();
+builder.Services.AddScoped<IUsdaService, UsdaService>();
 
 var app = builder.Build();
 
