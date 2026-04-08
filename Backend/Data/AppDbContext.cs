@@ -14,7 +14,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
 
     protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
     {
-        configurationBuilder.Properties<decimal>().HavePrecision(9, 2);
+        configurationBuilder.Properties<decimal>().HavePrecision(19, 8);
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
