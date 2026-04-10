@@ -10,21 +10,26 @@ public class IngredientService(AppDbContext context, IUsdaService usdaService) :
 {
     public async Task<Ingredient> AddAsync(IngredientCreateDto dto)
     {
-        var data = await usdaService.GetByIdAsync(dto.UsdaId);
-
-        decimal? FindNutrient(Nutrient n) => data?.FoodNutrients.FirstOrDefault(x => x.Nutrient.Id == n.UsdaId)?.Amount;
-
         decimal chlorideFactor = 0.6066m;
         decimal sodiumFactor = 0.3934m;
-        decimal? k1 = FindNutrient(Nutrients.VitaminK1);
-        decimal? k1D = FindNutrient(Nutrients.VitaminK1Dihydro);
-        decimal? k2 = FindNutrient(Nutrients.VitaminK2);
         decimal? vitaminK = null;
+        UsdaResponseDto? data = null;
 
-        if (k1 != null || k1D != null || k2 != null)
+        if (dto.UsdaId.HasValue)
         {
-            vitaminK = (k1 ?? 0) + (k1D ?? 0) + (k2 ?? 0);
+            data = await usdaService.GetByIdAsync(dto.UsdaId.Value);
+
+            decimal? k1 = FindNutrient(Nutrients.VitaminK1);
+            decimal? k1D = FindNutrient(Nutrients.VitaminK1Dihydro);
+            decimal? k2 = FindNutrient(Nutrients.VitaminK2);
+
+            if (k1 != null || k1D != null || k2 != null)
+            {
+                vitaminK = (k1 ?? 0) + (k1D ?? 0) + (k2 ?? 0);
+            }
         }
+
+        decimal? FindNutrient(Nutrient n) => data?.FoodNutrients.FirstOrDefault(x => x.Nutrient.Id == n.UsdaId)?.Amount;
 
         var ingredient = new Ingredient
         {

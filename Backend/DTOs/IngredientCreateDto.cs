@@ -35,7 +35,7 @@ public class IngredientCreateDto
     public decimal Sugar { get; set; }
 
     [Range(1, int.MaxValue)]
-    public int UsdaId { get; set; }
+    public int? UsdaId { get; set; }
 
     [MaxLength(255)]
     [Required]
