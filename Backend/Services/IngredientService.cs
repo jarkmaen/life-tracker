@@ -93,11 +93,19 @@ public class IngredientService(AppDbContext context, IUsdaService usdaService) :
 
     public async Task<Ingredient?> GetByIdAsync(int id)
     {
-        return await context.Ingredients.FindAsync(id);
+        return await context.Ingredients
+            .Include(i => i.Macro)
+            .Include(i => i.Mineral)
+            .Include(i => i.Vitamin)
+            .FirstOrDefaultAsync(i => i.Id == id);
     }
 
     public async Task<List<Ingredient>> GetAllAsync()
     {
-        return await context.Ingredients.ToListAsync();
+        return await context.Ingredients
+            .Include(i => i.Macro)
+            .Include(i => i.Mineral)
+            .Include(i => i.Vitamin)
+            .ToListAsync();
     }
 }
