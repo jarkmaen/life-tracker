@@ -1,11 +1,10 @@
 ﻿using Backend.DTOs;
-using Backend.Models;
 
 namespace Backend.Services;
 
 public interface IMealService
 {
-    Task<List<Meal>> GetAllAsync();
-    Task<Meal> AddAsync(MealCreateDto dto);
-    Task<Meal?> GetByIdAsync(int id);
+    Task<List<MealResponseDto>> GetAllAsync();
+    Task<MealResponseDto> AddAsync(MealCreateDto dto);
+    Task<MealResponseDto?> GetByIdAsync(int id);
 }
