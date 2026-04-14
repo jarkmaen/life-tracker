@@ -17,6 +17,7 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(buil
 builder.Services.AddHttpClient();
 builder.Services.AddOpenApi();
 builder.Services.AddScoped<IIngredientService, IngredientService>();
+builder.Services.AddScoped<IMealService, MealService>();
 builder.Services.AddScoped<IUsdaService, UsdaService>();
 
 var app = builder.Build();
