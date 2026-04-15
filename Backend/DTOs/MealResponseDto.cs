@@ -7,6 +7,7 @@ public class MealResponseDto
     public int Id { get; set; }
     public int Servings { get; set; }
     public List<MealIngredientResponse> MealIngredients { get; set; } = [];
+    public NutrientDto Nutrients { get; set; } = new();
     public string Name { get; set; } = string.Empty;
 }
 
