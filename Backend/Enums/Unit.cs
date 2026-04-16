@@ -3,6 +3,7 @@
 public enum Unit
 {
     Gram,
-    Milligram,
-    Microgram
+    Kilocalorie,
+    Microgram,
+    Milligram
 }
