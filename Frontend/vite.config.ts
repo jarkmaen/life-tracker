@@ -9,5 +9,13 @@ export default defineConfig({
         babel({ presets: [reactCompilerPreset()] }),
         react(),
         tailwindcss()
-    ]
+    ],
+    server: {
+        proxy: {
+            "/api": {
+                changeOrigin: true,
+                target: "http://localhost:5020"
+            }
+        }
+    }
 });

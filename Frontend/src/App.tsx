@@ -9,8 +9,8 @@ const App = () => {
         const fetchData = async () => {
             try {
                 const [driRes, mealsRes] = await Promise.all([
-                    fetch("https://localhost:7203/api/dri"),
-                    fetch("https://localhost:7203/api/meals")
+                    fetch("/api/dri"),
+                    fetch("/api/meals")
                 ]);
 
                 const driData = await driRes.json();
