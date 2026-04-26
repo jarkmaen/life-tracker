@@ -1,3 +1,4 @@
+import Sidebar from "./components/Sidebar";
 import { Route, Routes } from "react-router-dom";
 import { useAppContext } from "./context/AppContext";
 import { useEffect } from "react";
@@ -29,11 +30,15 @@ const App = () => {
     }, [setAppState]);
 
     return (
-        <Routes>
-            <Route path="/exercises" />
-            <Route path="/habits" />
-            <Route path="/nutrients" />
-        </Routes>
+        <div className="flex font-mono h-screen text-[11px]">
+            <Sidebar />
+            <Routes>
+                <Route path="/" />
+                <Route path="/exercises" />
+                <Route path="/habits" />
+                <Route path="/nutrients" />
+            </Routes>
+        </div>
     );
 };
 
