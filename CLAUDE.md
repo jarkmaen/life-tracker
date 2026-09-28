@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project direction
 
-Originally scoped as a habit/exercise/nutrient tracker ("life-tracker"). The scope is being narrowed to **nutrient tracking only** — habit and exercise features (e.g. the `/exercises` and `/habits` routes in `Frontend/src/App.tsx` and their sidebar items) are leftovers to remove, not features to build out.
+Originally scoped as a habit/exercise/nutrient tracker ("life-tracker"); now **nutrients only**. The app is a single-page calculator, not a logger: the user selects meals from the DB and sees the combined macros/minerals/vitamins against DRI targets. Selection is ephemeral UI state — no dates, no food log, no persistence of selections.
 
 ## Layout
 
@@ -61,7 +61,9 @@ dotnet user-secrets set "UsdaApiKey" "<key>" --project Backend
 
 **Frontend ↔ backend type sharing:** `Microsoft.Extensions.ApiDescription.Server` emits the OpenAPI document to `Backend/obj/Backend.json` on backend build. `npm run generate-types` turns that into `Frontend/src/types/api.ts` (generated — don't edit), and `src/types/index.ts` re-exports friendly aliases (`Dri`, `Meal`). After changing DTOs: build the backend, then regenerate types.
 
-**Frontend state:** `App.tsx` fetches `/api/dri` and `/api/meals` once on mount into a single `AppContext` (`useAppContext()`); components read from there. Routing is `react-router-dom` with a `Sidebar` for navigation.
+**Frontend state:** `App.tsx` fetches `/api/dri` and `/api/meals` once on mount into a single `AppContext` (`useAppContext()`); components read from there. No router — it's a single view.
+
+**npm:** there's an existing peer-dependency conflict (`openapi-typescript` wants TypeScript 5, the project uses 6), so `npm install`/`uninstall` need `--legacy-peer-deps`.
 
 ## Style
 
