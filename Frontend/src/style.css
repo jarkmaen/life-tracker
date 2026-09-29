@@ -1,1 +1,40 @@
 @import "tailwindcss";
+
+@font-face {
+    font-display: swap;
+    font-family: "JetBrains Mono";
+    font-style: italic;
+    font-weight: 100 800;
+    src: url("./assets/JetBrainsMono-Italic-VariableFont_wght.woff2") format("woff2");
+}
+
+@font-face {
+    font-display: swap;
+    font-family: "JetBrains Mono";
+    font-style: normal;
+    font-weight: 100 800;
+    src: url("./assets/JetBrainsMono-VariableFont_wght.woff2") format("woff2");
+}
+
+@theme {
+    --color-background: #141414;
+    --color-foreground: #e5e5e5;
+    --color-primary: #f97316;
+    --color-surface: #1a1a1a;
+    --color-surface-sunken: #0e0e0e;
+
+    --font-mono: "JetBrains Mono", monospace;
+}
+
+@layer base {
+    body {
+        @apply bg-background font-mono text-foreground text-xs;
+        color-scheme: dark;
+    }
+
+    body,
+    html,
+    #root {
+        height: 100%;
+    }
+}

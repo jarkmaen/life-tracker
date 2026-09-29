@@ -1,4 +1,6 @@
-import { useAppContext } from "./context/AppContext";
+import Sidebar from "./components/Sidebar";
+import StatusBar from "./components/StatusBar";
+import { useAppContext } from "./context/useAppContext";
 import { useEffect } from "react";
 
 const App = () => {
@@ -27,7 +29,15 @@ const App = () => {
         fetchData();
     }, [setAppState]);
 
-    return <div className="font-mono h-screen text-[11px]"></div>;
+    return (
+        <div className="flex flex-col h-full md:flex-row">
+            <Sidebar />
+            <main className="flex flex-1 flex-col min-h-0 min-w-0">
+                <div className="flex-1 min-h-0 overflow-y-auto px-5 py-4"></div>
+                <StatusBar />
+            </main>
+        </div>
+    );
 };
 
 export default App;

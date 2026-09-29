@@ -68,5 +68,5 @@ dotnet user-secrets set "UsdaApiKey" "<key>" --project Backend
 ## Style
 
 - Prettier (`Frontend/.prettierrc`): 4-space indent, no trailing commas.
-- Existing code keeps imports, object properties, JSX props, and JSON keys sorted alphabetically — follow that.
+- Existing code keeps imports, object properties, JSX props, JSON keys, CSS properties, and Tailwind classes (variant-prefixed like `md:` sort by their full string) sorted alphabetically — follow that.
 - C#: primary constructors for DI, file-scoped namespaces, collection expressions (`[.. x]`).
