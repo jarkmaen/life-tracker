@@ -19,6 +19,8 @@
 @theme {
     --color-background: #141414;
     --color-foreground: #e5e5e5;
+    --color-foreground-muted: #9a9a9a;
+    --color-foreground-subtle: #5c5c5c;
     --color-primary: #f97316;
     --color-surface: #1a1a1a;
     --color-surface-sunken: #0e0e0e;

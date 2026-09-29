@@ -9,6 +9,7 @@ export interface AppContextType {
 export interface AppState {
     dri: Dri[];
     meals: Meal[];
+    selectedMealIds: number[];
 }
 
 export const AppContext = createContext<AppContextType | null>(null);

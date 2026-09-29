@@ -4,7 +4,8 @@ import { type ReactNode, useState } from "react";
 export const AppProvider = ({ children }: { children: ReactNode }) => {
     const [appState, setAppState] = useState<AppState>({
         dri: [],
-        meals: []
+        meals: [],
+        selectedMealIds: []
     });
 
     return (

@@ -17,10 +17,11 @@ const App = () => {
                 const driData = await driRes.json();
                 const mealsData = await mealsRes.json();
 
-                setAppState({
+                setAppState((prev) => ({
+                    ...prev,
                     dri: driData,
                     meals: mealsData
-                });
+                }));
             } catch (e) {
                 console.error(e);
             }
