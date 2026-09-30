@@ -34,7 +34,7 @@ const MealList = () => {
                 <p className="px-4 text-foreground-subtle">no meals found</p>
             ) : (
                 meals.map((meal) => {
-                    const id = Number(meal.id);
+                    const { id } = meal;
 
                     return (
                         <MealItem

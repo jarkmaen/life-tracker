@@ -8,8 +8,7 @@ type Props = {
 };
 
 const MealItem = ({ checked, meal, onToggle }: Props) => {
-    const energy = Number(meal.nutrients?.energy ?? 0);
-    const protein = Number(meal.nutrients?.protein ?? 0);
+    const { energy, protein } = meal.nutrients;
 
     return (
         <label

@@ -117,7 +117,7 @@ export interface paths {
                 query?: never;
                 header?: never;
                 path: {
-                    id: number | string;
+                    id: number;
                 };
                 cookie?: never;
             };
@@ -220,7 +220,7 @@ export interface paths {
                 query?: never;
                 header?: never;
                 path: {
-                    id: number | string;
+                    id: number;
                 };
                 cookie?: never;
             };
@@ -253,246 +253,246 @@ export interface components {
     schemas: {
         DriResponseDto: {
             /** Format: double */
-            recommended?: null | number | string;
+            recommended: null | number;
             /** Format: double */
-            upperLimit?: null | number | string;
-            name?: string;
-            unit?: string;
+            upperLimit: null | number;
+            name: string;
+            unit: string;
         };
         Ingredient: {
             /** Format: int32 */
-            id?: number | string;
+            id?: number;
             /** Format: double */
-            energy?: number | string;
+            energy?: number;
             name?: string;
             /** Format: double */
-            price?: number | string;
+            price?: number;
             /** Format: double */
-            quantity?: number | string;
+            quantity?: number;
             macro?: components["schemas"]["Macro"];
             mineral?: components["schemas"]["Mineral"];
             vitamin?: components["schemas"]["Vitamin"];
         };
         IngredientCreateDto: {
             /** Format: double */
-            carbohydrate?: number | string;
+            carbohydrate?: number;
             /** Format: double */
-            energy?: number | string;
+            energy?: number;
             /** Format: double */
-            fat?: number | string;
+            fat?: number;
             /** Format: double */
-            fiber?: number | string;
+            fiber?: number;
             /** Format: double */
-            price?: number | string;
+            price?: number;
             /** Format: double */
-            protein?: number | string;
+            protein?: number;
             /** Format: double */
-            quantity?: number | string;
+            quantity?: number;
             /** Format: double */
-            salt?: number | string;
+            salt?: number;
             /** Format: double */
-            saturatedFat?: number | string;
+            saturatedFat?: number;
             /** Format: double */
-            sugar?: number | string;
+            sugar?: number;
             /** Format: int32 */
-            usdaId?: null | number | string;
+            usdaId?: null | number;
             name: string;
         };
         Macro: {
             /** Format: int32 */
-            id?: number | string;
+            id?: number;
             /** Format: int32 */
-            ingredientId?: number | string;
+            ingredientId?: number;
             /** Format: double */
-            carbohydrate?: number | string;
+            carbohydrate?: number;
             /** Format: double */
-            fat?: number | string;
+            fat?: number;
             /** Format: double */
-            fiber?: number | string;
+            fiber?: number;
             /** Format: double */
-            protein?: number | string;
+            protein?: number;
             /** Format: double */
-            saturatedFat?: number | string;
+            saturatedFat?: number;
             /** Format: double */
-            sugar?: number | string;
+            sugar?: number;
             /** Format: double */
-            alphaLinolenicAcid?: null | number | string;
+            alphaLinolenicAcid?: null | number;
             /** Format: double */
-            linoleicAcid?: null | number | string;
+            linoleicAcid?: null | number;
         };
         MealCreateDto: {
             /** Format: int32 */
-            servings?: number | string;
+            servings?: number;
             mealIngredients?: components["schemas"]["MealIngredientCreate"][];
             name: string;
         };
         MealIngredientCreate: {
             /** Format: double */
-            quantityUsed?: number | string;
+            quantityUsed?: number;
             /** Format: int32 */
-            ingredientId?: number | string;
+            ingredientId?: number;
         };
         MealIngredientResponse: {
             /** Format: double */
-            quantityUsed?: number | string;
-            ingredient?: components["schemas"]["Ingredient"];
+            quantityUsed: number;
+            ingredient: components["schemas"]["Ingredient"];
         };
         MealResponseDto: {
             /** Format: int32 */
-            id?: number | string;
+            id: number;
             /** Format: int32 */
-            servings?: number | string;
-            mealIngredients?: components["schemas"]["MealIngredientResponse"][];
-            nutrients?: components["schemas"]["NutrientDto"];
-            name?: string;
+            servings: number;
+            mealIngredients: components["schemas"]["MealIngredientResponse"][];
+            nutrients: components["schemas"]["NutrientDto"];
+            name: string;
         };
         Mineral: {
             /** Format: int32 */
-            id?: number | string;
+            id?: number;
             /** Format: int32 */
-            ingredientId?: number | string;
+            ingredientId?: number;
             /** Format: double */
-            chloride?: number | string;
+            chloride?: number;
             /** Format: double */
-            sodium?: number | string;
+            sodium?: number;
             /** Format: double */
-            calcium?: null | number | string;
+            calcium?: null | number;
             /** Format: double */
-            chromium?: null | number | string;
+            chromium?: null | number;
             /** Format: double */
-            copper?: null | number | string;
+            copper?: null | number;
             /** Format: double */
-            fluoride?: null | number | string;
+            fluoride?: null | number;
             /** Format: double */
-            iodine?: null | number | string;
+            iodine?: null | number;
             /** Format: double */
-            iron?: null | number | string;
+            iron?: null | number;
             /** Format: double */
-            magnesium?: null | number | string;
+            magnesium?: null | number;
             /** Format: double */
-            manganese?: null | number | string;
+            manganese?: null | number;
             /** Format: double */
-            molybdenum?: null | number | string;
+            molybdenum?: null | number;
             /** Format: double */
-            phosphorus?: null | number | string;
+            phosphorus?: null | number;
             /** Format: double */
-            potassium?: null | number | string;
+            potassium?: null | number;
             /** Format: double */
-            selenium?: null | number | string;
+            selenium?: null | number;
             /** Format: double */
-            zinc?: null | number | string;
+            zinc?: null | number;
         };
         NutrientDto: {
             /** Format: double */
-            carbohydrate?: number | string;
+            carbohydrate: number;
             /** Format: double */
-            energy?: number | string;
+            energy: number;
             /** Format: double */
-            fat?: number | string;
+            fat: number;
             /** Format: double */
-            fiber?: number | string;
+            fiber: number;
             /** Format: double */
-            protein?: number | string;
+            protein: number;
             /** Format: double */
-            saturatedFat?: number | string;
+            saturatedFat: number;
             /** Format: double */
-            sugar?: number | string;
+            sugar: number;
             /** Format: double */
-            alphaLinolenicAcid?: null | number | string;
+            alphaLinolenicAcid: null | number;
             /** Format: double */
-            linoleicAcid?: null | number | string;
+            linoleicAcid: null | number;
             /** Format: double */
-            chloride?: number | string;
+            chloride: number;
             /** Format: double */
-            sodium?: number | string;
+            sodium: number;
             /** Format: double */
-            calcium?: null | number | string;
+            calcium: null | number;
             /** Format: double */
-            chromium?: null | number | string;
+            chromium: null | number;
             /** Format: double */
-            copper?: null | number | string;
+            copper: null | number;
             /** Format: double */
-            fluoride?: null | number | string;
+            fluoride: null | number;
             /** Format: double */
-            iodine?: null | number | string;
+            iodine: null | number;
             /** Format: double */
-            iron?: null | number | string;
+            iron: null | number;
             /** Format: double */
-            magnesium?: null | number | string;
+            magnesium: null | number;
             /** Format: double */
-            manganese?: null | number | string;
+            manganese: null | number;
             /** Format: double */
-            molybdenum?: null | number | string;
+            molybdenum: null | number;
             /** Format: double */
-            phosphorus?: null | number | string;
+            phosphorus: null | number;
             /** Format: double */
-            potassium?: null | number | string;
+            potassium: null | number;
             /** Format: double */
-            selenium?: null | number | string;
+            selenium: null | number;
             /** Format: double */
-            zinc?: null | number | string;
+            zinc: null | number;
             /** Format: double */
-            biotin?: null | number | string;
+            biotin: null | number;
             /** Format: double */
-            choline?: null | number | string;
+            choline: null | number;
             /** Format: double */
-            folate?: null | number | string;
+            folate: null | number;
             /** Format: double */
-            niacin?: null | number | string;
+            niacin: null | number;
             /** Format: double */
-            pantothenicAcid?: null | number | string;
+            pantothenicAcid: null | number;
             /** Format: double */
-            riboflavin?: null | number | string;
+            riboflavin: null | number;
             /** Format: double */
-            thiamin?: null | number | string;
+            thiamin: null | number;
             /** Format: double */
-            vitaminA?: null | number | string;
+            vitaminA: null | number;
             /** Format: double */
-            vitaminB12?: null | number | string;
+            vitaminB12: null | number;
             /** Format: double */
-            vitaminB6?: null | number | string;
+            vitaminB6: null | number;
             /** Format: double */
-            vitaminC?: null | number | string;
+            vitaminC: null | number;
             /** Format: double */
-            vitaminD?: null | number | string;
+            vitaminD: null | number;
             /** Format: double */
-            vitaminE?: null | number | string;
+            vitaminE: null | number;
             /** Format: double */
-            vitaminK?: null | number | string;
+            vitaminK: null | number;
         };
         Vitamin: {
             /** Format: int32 */
-            id?: number | string;
+            id?: number;
             /** Format: int32 */
-            ingredientId?: number | string;
+            ingredientId?: number;
             /** Format: double */
-            biotin?: null | number | string;
+            biotin?: null | number;
             /** Format: double */
-            choline?: null | number | string;
+            choline?: null | number;
             /** Format: double */
-            folate?: null | number | string;
+            folate?: null | number;
             /** Format: double */
-            niacin?: null | number | string;
+            niacin?: null | number;
             /** Format: double */
-            pantothenicAcid?: null | number | string;
+            pantothenicAcid?: null | number;
             /** Format: double */
-            riboflavin?: null | number | string;
+            riboflavin?: null | number;
             /** Format: double */
-            thiamin?: null | number | string;
+            thiamin?: null | number;
             /** Format: double */
-            vitaminA?: null | number | string;
+            vitaminA?: null | number;
             /** Format: double */
-            vitaminB12?: null | number | string;
+            vitaminB12?: null | number;
             /** Format: double */
-            vitaminB6?: null | number | string;
+            vitaminB6?: null | number;
             /** Format: double */
-            vitaminC?: null | number | string;
+            vitaminC?: null | number;
             /** Format: double */
-            vitaminD?: null | number | string;
+            vitaminD?: null | number;
             /** Format: double */
-            vitaminE?: null | number | string;
+            vitaminE?: null | number;
             /** Format: double */
-            vitaminK?: null | number | string;
+            vitaminK?: null | number;
         };
     };
     responses: never;
