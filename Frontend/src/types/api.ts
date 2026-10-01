@@ -256,6 +256,7 @@ export interface components {
             recommended: null | number;
             /** Format: double */
             upperLimit: null | number;
+            key: string;
             name: string;
             unit: string;
         };
