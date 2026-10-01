@@ -11,6 +11,9 @@ public class DriResponseDto
     public decimal? UpperLimit { get; set; }
 
     [Required]
+    public string Key { get; set; } = string.Empty;
+
+    [Required]
     public string Name { get; set; } = string.Empty;
 
     [Required]
