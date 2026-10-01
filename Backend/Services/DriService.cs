@@ -15,6 +15,7 @@ public class DriService : IDriService
 
         return [.. fields
             .Select(f => (Field: f, Nutrient: (Nutrient)f.GetValue(null)!))
+            .Where(x => x.Nutrient.Recommended.HasValue || x.Nutrient.UpperLimit.HasValue)
             .Select(x => new DriResponseDto
             {
                 Recommended = x.Nutrient.Recommended,
