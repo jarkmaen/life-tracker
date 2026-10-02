@@ -22,6 +22,20 @@ const getState = (dri: Dri, hasData: boolean, value: number): NutrientState => {
     return "ok";
 };
 
+export const getStatusText = ({ dri, state, value }: NutrientTotal) => {
+    const target = state === "ok" ? dri.upperLimit : dri.recommended;
+
+    if (state === "none" || !target) {
+        return "n/a";
+    }
+
+    if (state === "over") {
+        return "OVER";
+    }
+
+    return `${Math.round((value / target) * 100)}%`;
+};
+
 export const calculateTotals = (
     dri: Dri[],
     meals: Meal[],
