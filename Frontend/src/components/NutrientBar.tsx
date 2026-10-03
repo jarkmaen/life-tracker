@@ -9,7 +9,7 @@ const FILL_COLORS: Record<NutrientState, string> = {
     over: "bg-danger"
 };
 
-const NutrientBar = ({ total }: { total: NutrientTotal }) => {
+export const NutrientBar = ({ total }: { total: NutrientTotal }) => {
     const { dri, state, value } = total;
     const max = getScaleMax(dri);
 
@@ -41,5 +41,3 @@ const NutrientBar = ({ total }: { total: NutrientTotal }) => {
         </div>
     );
 };
-
-export default NutrientBar;

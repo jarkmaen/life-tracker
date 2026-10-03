@@ -1,7 +1,7 @@
-import NutrientBar from "./NutrientBar";
 import type { NutrientState, NutrientTotal } from "../types";
 import { formatNumber } from "../utils/format";
 import { getStatusText } from "../utils/nutrients";
+import { NutrientBar } from "./NutrientBar";
 import { UNIT_SYMBOLS } from "../constants/nutrients";
 
 const STATUS_COLORS: Record<NutrientState, string> = {
@@ -12,7 +12,7 @@ const STATUS_COLORS: Record<NutrientState, string> = {
     over: "text-danger"
 };
 
-const NutrientRow = ({ total }: { total: NutrientTotal }) => {
+export const NutrientRow = ({ total }: { total: NutrientTotal }) => {
     const { dri, state, value } = total;
     const unit = UNIT_SYMBOLS[dri.unit];
 
@@ -26,9 +26,11 @@ const NutrientRow = ({ total }: { total: NutrientTotal }) => {
                 {state === "none" ? <>&mdash;</> : formatNumber(value)} {unit}
             </span>
             <span className="tabular-nums text-foreground-subtle text-right">
-                {dri.recommended !== null
-                    ? formatNumber(dri.recommended)
-                    : <>&le;{formatNumber(dri.upperLimit ?? 0)}</>}
+                {dri.recommended !== null ? (
+                    formatNumber(dri.recommended)
+                ) : (
+                    <>&le;{formatNumber(dri.upperLimit ?? 0)}</>
+                )}
             </span>
             <span
                 className={`tabular-nums text-right whitespace-nowrap ${STATUS_COLORS[state]}`}
@@ -38,5 +40,3 @@ const NutrientRow = ({ total }: { total: NutrientTotal }) => {
         </div>
     );
 };
-
-export default NutrientRow;

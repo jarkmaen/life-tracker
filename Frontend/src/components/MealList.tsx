@@ -1,7 +1,7 @@
-import MealItem from "./MealItem";
+import { MealItem } from "./MealItem";
 import { useAppContext } from "../context/useAppContext";
 
-const MealList = () => {
+export const MealList = () => {
     const { appState, setAppState } = useAppContext();
     const { meals, selectedMealIds } = appState;
 
@@ -49,5 +49,3 @@ const MealList = () => {
         </div>
     );
 };
-
-export default MealList;

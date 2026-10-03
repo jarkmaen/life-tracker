@@ -1,10 +1,10 @@
-import NutrientGroups from "./components/NutrientGroups";
-import Sidebar from "./components/Sidebar";
+import { NutrientGroups } from "./components/NutrientGroups";
+import { Sidebar } from "./components/Sidebar";
 import { StatusBar } from "./components/StatusBar";
 import { useAppContext } from "./context/useAppContext";
 import { useEffect } from "react";
 
-const App = () => {
+export const App = () => {
     const { setAppState } = useAppContext();
 
     useEffect(() => {
@@ -43,5 +43,3 @@ const App = () => {
         </div>
     );
 };
-
-export default App;

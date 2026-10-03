@@ -1,9 +1,9 @@
-import NutrientGroup from "./NutrientGroup";
 import { calculateTotals } from "../utils/nutrients";
 import { NUTRIENT_COLUMNS } from "../constants/nutrients";
+import { NutrientGroup } from "./NutrientGroup";
 import { useAppContext } from "../context/useAppContext";
 
-const NutrientGroups = () => {
+export const NutrientGroups = () => {
     const { appState } = useAppContext();
     const { dri, meals, selectedMealIds } = appState;
 
@@ -28,5 +28,3 @@ const NutrientGroups = () => {
         </div>
     );
 };
-
-export default NutrientGroups;

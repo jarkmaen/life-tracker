@@ -7,7 +7,7 @@ type Props = {
     onToggle: () => void;
 };
 
-const MealItem = ({ checked, meal, onToggle }: Props) => {
+export const MealItem = ({ checked, meal, onToggle }: Props) => {
     const { energy, protein } = meal.nutrients;
 
     return (
@@ -30,11 +30,10 @@ const MealItem = ({ checked, meal, onToggle }: Props) => {
             <span>
                 {meal.name}
                 <small className="block text-[11px] text-foreground-subtle">
-                    {formatNumber(energy)} kcal &middot; {formatNumber(protein)} g prot
+                    {formatNumber(energy)} kcal &middot; {formatNumber(protein)}{" "}
+                    g prot
                 </small>
             </span>
         </label>
     );
 };
-
-export default MealItem;
