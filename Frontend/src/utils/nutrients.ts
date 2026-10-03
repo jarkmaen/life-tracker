@@ -1,6 +1,7 @@
 import type {
     Dri,
     Meal,
+    MealContribution,
     Nutrients,
     NutrientState,
     NutrientTotal
@@ -31,15 +32,26 @@ export const calculateTotals = (
     const source = selected.length > 0 ? selected : meals;
 
     return dri.map((nutrient) => {
+        const contributions: MealContribution[] = [];
         const key = nutrient.key as keyof Nutrients;
 
+        for (const meal of selected) {
+            const amount = meal.nutrients[key];
+
+            if (amount !== null) {
+                contributions.push({
+                    id: meal.id,
+                    name: meal.name,
+                    value: amount
+                });
+            }
+        }
+
         const hasData = source.some((meal) => meal.nutrients[key] !== null);
-        const value = selected.reduce(
-            (sum, meal) => sum + (meal.nutrients[key] ?? 0),
-            0
-        );
+        const value = contributions.reduce((sum, item) => sum + item.value, 0);
 
         return {
+            contributions,
             dri: nutrient,
             state: getState(nutrient, hasData, value),
             value

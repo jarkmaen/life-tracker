@@ -1,6 +1,13 @@
 import type { components } from "./api";
 
+export interface MealContribution {
+    id: number;
+    name: string;
+    value: number;
+}
+
 export interface NutrientTotal {
+    contributions: MealContribution[];
     dri: Dri;
     state: NutrientState;
     value: number;
