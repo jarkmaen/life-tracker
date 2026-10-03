@@ -1,3 +1,4 @@
+import NutrientBar from "./NutrientBar";
 import type { NutrientState, NutrientTotal } from "../types";
 import { formatNumber } from "../utils/format";
 import { getStatusText } from "../utils/nutrients";
@@ -18,7 +19,7 @@ const NutrientRow = ({ total }: { total: NutrientTotal }) => {
     return (
         <div className="gap-3 grid grid-cols-[150px_minmax(80px,1fr)_88px_56px_48px] hover:bg-white/4 items-center min-w-117.5 py-0.75">
             <span className="text-foreground-muted truncate">{dri.name}</span>
-            <span />
+            <NutrientBar total={total} />
             <span
                 className={`tabular-nums text-right ${state === "none" ? "text-foreground-subtle" : ""}`}
             >

@@ -22,20 +22,6 @@ const getState = (dri: Dri, hasData: boolean, value: number): NutrientState => {
     return "ok";
 };
 
-export const getStatusText = ({ dri, state, value }: NutrientTotal) => {
-    const target = state === "ok" ? dri.upperLimit : dri.recommended;
-
-    if (state === "none" || !target) {
-        return "n/a";
-    }
-
-    if (state === "over") {
-        return "OVER";
-    }
-
-    return `${Math.round((value / target) * 100)}%`;
-};
-
 export const calculateTotals = (
     dri: Dri[],
     meals: Meal[],
@@ -59,4 +45,30 @@ export const calculateTotals = (
             value
         };
     });
+};
+
+export const getScaleMax = ({ recommended, upperLimit }: Dri) => {
+    if (recommended === null) {
+        return (upperLimit ?? 0) * 1.25;
+    }
+
+    if (upperLimit !== null && upperLimit <= recommended * 2.5) {
+        return upperLimit * 1.2;
+    }
+
+    return recommended * 2;
+};
+
+export const getStatusText = ({ dri, state, value }: NutrientTotal) => {
+    const target = state === "ok" ? dri.upperLimit : dri.recommended;
+
+    if (state === "none" || !target) {
+        return "n/a";
+    }
+
+    if (state === "over") {
+        return "OVER";
+    }
+
+    return `${Math.round((value / target) * 100)}%`;
 };

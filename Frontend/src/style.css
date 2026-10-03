@@ -16,21 +16,6 @@
     src: url("./assets/JetBrainsMono-VariableFont_wght.woff2") format("woff2");
 }
 
-@theme {
-    --color-background: #141414;
-    --color-border: #2a2a2a;
-    --color-danger: #f87171;
-    --color-foreground: #e5e5e5;
-    --color-foreground-muted: #9a9a9a;
-    --color-foreground-subtle: #5c5c5c;
-    --color-primary: #f97316;
-    --color-success: #4ade80;
-    --color-surface: #1a1a1a;
-    --color-surface-sunken: #0e0e0e;
-
-    --font-mono: "JetBrains Mono", monospace;
-}
-
 @layer base {
     body {
         @apply bg-background font-mono text-foreground text-xs;
@@ -42,4 +27,44 @@
     #root {
         height: 100%;
     }
+}
+
+@theme {
+    --color-background: #141414;
+    --color-border: #2a2a2a;
+    --color-danger: #f87171;
+    --color-foreground: #e5e5e5;
+    --color-foreground-muted: #9a9a9a;
+    --color-foreground-subtle: #5c5c5c;
+    --color-muted: #262626;
+    --color-primary: #f97316;
+    --color-success: #4ade80;
+    --color-surface: #1a1a1a;
+    --color-surface-sunken: #0e0e0e;
+
+    --font-mono: "JetBrains Mono", monospace;
+}
+
+@utility bar-blank {
+    background: repeating-linear-gradient(
+        135deg,
+        var(--color-muted) 0 3px,
+        transparent 3px 6px
+    );
+}
+
+@utility bar-fill {
+    mask-image: repeating-linear-gradient(
+        to right,
+        #000 0 5px,
+        transparent 5px 6px
+    );
+}
+
+@utility bar-limit {
+    background: repeating-linear-gradient(
+        to bottom,
+        var(--color-danger) 0 2px,
+        transparent 2px 4px
+    );
 }
