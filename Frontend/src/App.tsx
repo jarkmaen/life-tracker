@@ -1,6 +1,6 @@
 import NutrientGroups from "./components/NutrientGroups";
 import Sidebar from "./components/Sidebar";
-import StatusBar from "./components/StatusBar";
+import { StatusBar } from "./components/StatusBar";
 import { useAppContext } from "./context/useAppContext";
 import { useEffect } from "react";
 
