@@ -29,7 +29,6 @@ export const calculateTotals = (
     selectedMealIds: number[]
 ): NutrientTotal[] => {
     const selected = meals.filter((meal) => selectedMealIds.includes(meal.id));
-    const source = selected.length > 0 ? selected : meals;
 
     return dri.map((nutrient) => {
         const contributions: MealContribution[] = [];
@@ -47,7 +46,7 @@ export const calculateTotals = (
             }
         }
 
-        const hasData = source.some((meal) => meal.nutrients[key] !== null);
+        const hasData = meals.some((meal) => meal.nutrients[key] !== null);
         const value = contributions.reduce((sum, item) => sum + item.value, 0);
 
         return {
