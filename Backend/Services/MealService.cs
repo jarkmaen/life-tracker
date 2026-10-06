@@ -17,6 +17,7 @@ public class MealService(AppDbContext context) : IMealService
 
         return [.. meals.Select(m => new MealResponseDto
         {
+            Price = CalculatePrice(m),
             Id = m.Id,
             Servings = m.Servings,
             MealIngredients = [.. m.MealIngredients.Select(mI => new MealIngredientResponse
@@ -63,6 +64,7 @@ public class MealService(AppDbContext context) : IMealService
 
         return new MealResponseDto
         {
+            Price = CalculatePrice(meal),
             Id = meal.Id,
             Servings = meal.Servings,
             MealIngredients = [.. meal.MealIngredients.Select(mI => new MealIngredientResponse
@@ -180,5 +182,14 @@ public class MealService(AppDbContext context) : IMealService
             VitaminE = Round(nutrients.VitaminE / s, 4),
             VitaminK = Round(nutrients.VitaminK / s, 4)
         };
+    }
+
+    private static decimal CalculatePrice(Meal meal)
+    {
+        decimal total = meal.MealIngredients
+            .Where(mI => mI.Ingredient.Quantity > 0)
+            .Sum(mI => mI.Ingredient.Price * mI.QuantityUsed / mI.Ingredient.Quantity);
+
+        return Math.Round(total / meal.Servings, 2);
     }
 }

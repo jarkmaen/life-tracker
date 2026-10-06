@@ -1,4 +1,5 @@
 import { calculateTotals } from "../utils/nutrients";
+import { formatPrice } from "../utils/format";
 import { TargetTotal } from "./TargetTotal";
 import { useAppContext } from "../context/useAppContext";
 
@@ -16,6 +17,9 @@ export const StatusBar = () => {
         (total) => total.value >= (total.dri.recommended ?? 0)
     ).length;
     const over = totals.filter((total) => total.state === "over").length;
+    const price = meals
+        .filter((meal) => selectedMealIds.includes(meal.id))
+        .reduce((sum, meal) => sum + meal.price, 0);
 
     const find = (key: string) => totals.find((total) => total.dri.key === key);
 
@@ -40,6 +44,12 @@ export const StatusBar = () => {
                             className={`font-medium ${over > 0 ? "text-danger" : "text-white"}`}
                         >
                             {over}
+                        </b>
+                    </span>
+                    <span>
+                        cost{" "}
+                        <b className="font-medium text-white">
+                            {formatPrice(price)}
                         </b>
                     </span>
                 </div>

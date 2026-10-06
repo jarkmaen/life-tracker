@@ -6,6 +6,9 @@ namespace Backend.DTOs;
 public class MealResponseDto
 {
     [Required]
+    public decimal Price { get; set; }
+
+    [Required]
     public int Id { get; set; }
 
     [Required]

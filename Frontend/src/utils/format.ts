@@ -5,3 +5,10 @@ export const formatNumber = (value: number) => {
         maximumFractionDigits: abs >= 100 ? 0 : abs >= 10 ? 1 : 2
     });
 };
+
+export const formatPrice = (value: number) => {
+    return value.toLocaleString("en-US", {
+        currency: "EUR",
+        style: "currency"
+    });
+};

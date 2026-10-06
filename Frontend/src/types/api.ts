@@ -339,6 +339,8 @@ export interface components {
             ingredient: components["schemas"]["Ingredient"];
         };
         MealResponseDto: {
+            /** Format: double */
+            price: number;
             /** Format: int32 */
             id: number;
             /** Format: int32 */
