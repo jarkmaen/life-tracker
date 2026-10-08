@@ -19,7 +19,7 @@ export const MealList = () => {
     };
 
     return (
-        <div className="flex-1 min-h-0 overflow-y-auto py-3">
+        <div className="flex-1 min-h-0 overflow-y-auto pt-3">
             <div className="flex justify-between pb-3 px-4 text-[11px] text-foreground-subtle">
                 <span>MEALS</span>
                 <button
