@@ -13,7 +13,10 @@ export const NutrientGroups = () => {
     return (
         <div className="gap-x-10 grid max-w-390 overflow-x-auto xl:grid-cols-2">
             {NUTRIENT_COLUMNS.map((groups, index) => (
-                <div key={index}>
+                <div
+                    className="content-start gap-x-2.5 grid grid-cols-[96px_minmax(0,1fr)_auto_auto] sm:gap-x-3 sm:grid-cols-[150px_minmax(80px,1fr)_88px_56px_48px] sm:min-w-117.5"
+                    key={index}
+                >
                     {groups.map((group) => (
                         <NutrientGroup
                             key={group.label}

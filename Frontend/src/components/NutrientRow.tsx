@@ -24,18 +24,18 @@ export const NutrientRow = ({ total }: { total: NutrientTotal }) => {
 
     return (
         <div
-            className="gap-3 grid grid-cols-[150px_minmax(80px,1fr)_88px_56px_48px] hover:bg-white/4 items-center min-w-117.5 py-0.75"
+            className="col-span-full grid grid-cols-subgrid hover:bg-white/4 items-center py-0.75"
             onMouseLeave={() => setPointer(null)}
             onMouseMove={(e) => setPointer({ x: e.clientX, y: e.clientY })}
         >
             <span className="text-foreground-muted truncate">{dri.name}</span>
             <NutrientBar total={total} />
             <span
-                className={`tabular-nums text-right ${state === "none" ? "text-foreground-subtle" : ""}`}
+                className={`tabular-nums text-right whitespace-nowrap ${state === "none" ? "text-foreground-subtle" : ""}`}
             >
                 {state === "none" ? <>&mdash;</> : formatNumber(value)} {unit}
             </span>
-            <span className="tabular-nums text-foreground-subtle text-right">
+            <span className="hidden sm:block tabular-nums text-foreground-subtle text-right">
                 {dri.recommended !== null ? (
                     formatNumber(dri.recommended)
                 ) : (
