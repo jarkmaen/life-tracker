@@ -1,4 +1,12 @@
-﻿using CLI.UI;
+﻿using CLI.Services;
+using CLI.UI;
+using Microsoft.Extensions.Configuration;
 
-var textUI = new TextUI();
-textUI.Run();
+var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
+var apiBaseUrl = configuration["ApiBaseUrl"] ?? throw new InvalidOperationException("ApiBaseUrl is missing from appsettings.json");
+
+var httpClient = new HttpClient { BaseAddress = new Uri(apiBaseUrl) };
+var ingredientService = new IngredientService(httpClient);
+var textUI = new TextUI(ingredientService);
+
+await textUI.RunAsync();

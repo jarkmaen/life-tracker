@@ -1,8 +1,10 @@
-﻿namespace CLI.UI
+﻿using CLI.Services;
+
+namespace CLI.UI
 {
-    public class TextUI
+    public class TextUI(IngredientService ingredientService)
     {
-        public void Run()
+        public async Task RunAsync()
         {
             while (true)
             {
@@ -69,7 +71,13 @@
                 }
                 else if (choice == "2")
                 {
-
+                    Console.Clear();
+                    Console.WriteLine("life tracker > list ingredients");
+                    Console.WriteLine();
+                    Console.WriteLine(await ingredientService.GetAllAsync());
+                    Console.WriteLine();
+                    Console.Write("press any key to continue...");
+                    Console.ReadKey();
                 }
                 else if (choice == "3" || string.IsNullOrWhiteSpace(choice))
                 {
