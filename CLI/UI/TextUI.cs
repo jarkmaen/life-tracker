@@ -74,7 +74,28 @@ namespace CLI.UI
                     Console.Clear();
                     Console.WriteLine("life tracker > list ingredients");
                     Console.WriteLine();
-                    Console.WriteLine(await ingredientService.GetAllAsync());
+
+                    try
+                    {
+                        var ingredients = await ingredientService.GetAllAsync();
+
+                        if (ingredients.Count == 0)
+                        {
+                            Console.WriteLine("no ingredients found.");
+                        }
+                        else
+                        {
+                            foreach (var ingredient in ingredients)
+                            {
+                                Console.WriteLine(ingredient.Name);
+                            }
+                        }
+                    }
+                    catch (HttpRequestException)
+                    {
+                        Console.WriteLine("could not load ingredients. is the backend running?");
+                    }
+
                     Console.WriteLine();
                     Console.Write("press any key to continue...");
                     Console.ReadKey();

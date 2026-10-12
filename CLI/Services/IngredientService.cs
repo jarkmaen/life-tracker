@@ -1,9 +1,12 @@
-﻿namespace CLI.Services;
+﻿using CLI.DTOs;
+using System.Net.Http.Json;
+
+namespace CLI.Services;
 
 public class IngredientService(HttpClient httpClient)
 {
-    public async Task<string> GetAllAsync()
+    public async Task<List<IngredientResponseDto>> GetAllAsync()
     {
-        return await httpClient.GetStringAsync("api/ingredients");
+        return await httpClient.GetFromJsonAsync<List<IngredientResponseDto>>("api/ingredients") ?? [];
     }
 }
