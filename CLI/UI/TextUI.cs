@@ -19,7 +19,7 @@ public class TextUI(IngredientService ingredientService)
             Console.WriteLine();
             Console.Write("> ");
 
-            string? choice = Console.ReadLine();
+            string? choice = Console.ReadLine()?.Trim();
 
             if (choice == "1")
             {
@@ -29,7 +29,7 @@ public class TextUI(IngredientService ingredientService)
             {
                 await ListIngredientsAsync();
             }
-            else if (choice == "3" || string.IsNullOrWhiteSpace(choice))
+            else if (choice == "3" || choice == null)
             {
                 break;
             }
