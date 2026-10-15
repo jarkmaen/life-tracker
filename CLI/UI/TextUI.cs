@@ -1,4 +1,5 @@
 ﻿using CLI.Services;
+using System.Globalization;
 
 namespace CLI.UI;
 
@@ -40,43 +41,21 @@ public class TextUI(IngredientService ingredientService)
         Console.WriteLine("life tracker > add ingredient");
         Console.WriteLine();
 
-        Console.Write("id       : ");
-        string? id = Console.ReadLine();
-
-        Console.Write("name     : ");
-        string? name = Console.ReadLine();
-
-        Console.Write("quantity : ");
-        string? quantity = Console.ReadLine();
-
-        Console.Write("price    : ");
-        string? price = Console.ReadLine();
+        int? usdaId = ReadOptionalInt("usda id  : ");
+        string name = ReadString("name     : ");
+        decimal quantity = ReadDecimal("quantity : ");
+        decimal price = ReadDecimal("price    : ");
 
         Console.WriteLine();
 
-        Console.Write("energy   : ");
-        string? energy = Console.ReadLine();
-
-        Console.Write("fat      : ");
-        string? fat = Console.ReadLine();
-
-        Console.Write("sat. fat : ");
-        string? saturatedFat = Console.ReadLine();
-
-        Console.Write("carbs    : ");
-        string? carbohydrate = Console.ReadLine();
-
-        Console.Write("sugar    : ");
-        string? sugar = Console.ReadLine();
-
-        Console.Write("protein  : ");
-        string? protein = Console.ReadLine();
-
-        Console.Write("salt     : ");
-        string? salt = Console.ReadLine();
-
-        Console.Write("fiber    : ");
-        string? fiber = Console.ReadLine();
+        decimal energy = ReadDecimal("energy   : ");
+        decimal fat = ReadDecimal("fat      : ");
+        decimal saturatedFat = ReadDecimal("sat. fat : ");
+        decimal carbohydrate = ReadDecimal("carbs    : ");
+        decimal sugar = ReadDecimal("sugar    : ");
+        decimal protein = ReadDecimal("protein  : ");
+        decimal salt = ReadDecimal("salt     : ");
+        decimal fiber = ReadDecimal("fiber    : ");
 
         Console.WriteLine();
         Console.WriteLine("ingredient added.");
@@ -115,5 +94,58 @@ public class TextUI(IngredientService ingredientService)
         Console.WriteLine();
         Console.Write("press any key to continue...");
         Console.ReadKey();
+    }
+
+    private static decimal ReadDecimal(string label)
+    {
+        while (true)
+        {
+            Console.Write(label);
+            string? input = Console.ReadLine()?.Replace(',', '.');
+
+            if (decimal.TryParse(input, CultureInfo.InvariantCulture, out decimal value) && value >= 0)
+            {
+                return value;
+            }
+
+            Console.WriteLine("enter a number of 0 or more.");
+        }
+    }
+
+    private static int? ReadOptionalInt(string label)
+    {
+        while (true)
+        {
+            Console.Write(label);
+            string? input = Console.ReadLine();
+
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                return null;
+            }
+
+            if (int.TryParse(input, out int value) && value >= 1)
+            {
+                return value;
+            }
+
+            Console.WriteLine("enter a whole number of 1 or more, or leave it empty.");
+        }
+    }
+
+    private static string ReadString(string label)
+    {
+        while (true)
+        {
+            Console.Write(label);
+            string? input = Console.ReadLine()?.Trim();
+
+            if (!string.IsNullOrEmpty(input) && input.Length <= 255)
+            {
+                return input;
+            }
+
+            Console.WriteLine("enter 1 to 255 characters.");
+        }
     }
 }
