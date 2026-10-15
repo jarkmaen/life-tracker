@@ -1,4 +1,5 @@
-﻿using CLI.Services;
+﻿using CLI.DTOs;
+using CLI.Services;
 using System.Globalization;
 
 namespace CLI.UI;
@@ -22,7 +23,7 @@ public class TextUI(IngredientService ingredientService)
 
             if (choice == "1")
             {
-                AddIngredient();
+                await AddIngredientAsync();
             }
             else if (choice == "2")
             {
@@ -35,7 +36,7 @@ public class TextUI(IngredientService ingredientService)
         }
     }
 
-    private void AddIngredient()
+    private async Task AddIngredientAsync()
     {
         Console.Clear();
         Console.WriteLine("life tracker > add ingredient");
@@ -57,8 +58,35 @@ public class TextUI(IngredientService ingredientService)
         decimal salt = ReadDecimal("salt     : ");
         decimal fiber = ReadDecimal("fiber    : ");
 
+        var ingredient = new IngredientCreateDto
+        {
+            Carbohydrate = carbohydrate,
+            Energy = energy,
+            Fat = fat,
+            Fiber = fiber,
+            Price = price,
+            Protein = protein,
+            Quantity = quantity,
+            Salt = salt,
+            SaturatedFat = saturatedFat,
+            Sugar = sugar,
+            UsdaId = usdaId,
+            Name = name
+        };
+
         Console.WriteLine();
-        Console.WriteLine("ingredient added.");
+
+        try
+        {
+            await ingredientService.AddAsync(ingredient);
+
+            Console.WriteLine("ingredient added.");
+        }
+        catch (HttpRequestException)
+        {
+            Console.WriteLine("could not add ingredient. is the backend running?");
+        }
+
         Console.WriteLine();
         Console.Write("press any key to continue...");
         Console.ReadKey();
