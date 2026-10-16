@@ -11,7 +11,7 @@ Originally scoped as a habit/exercise/nutrient tracker ("life-tracker"); now **n
 - `LifeTracker.slnx` — .NET solution containing `Backend`, `CLI`, `Tests` (all .NET 10).
 - `Backend/` — ASP.NET Core Web API + EF Core (SQL Server).
 - `Frontend/` — React 19 + TypeScript + Vite + Tailwind v4, React Compiler enabled via Babel. Not part of the .NET solution.
-- `CLI/` — early console UI stub; collects input but is not wired to anything.
+- `CLI/` — console app for data entry (add and list ingredients) that calls the backend over HTTP.
 - `Tests/` — Reqnroll (Gherkin/BDD) on xUnit, referencing `Backend` directly.
 
 ## Commands
@@ -22,6 +22,11 @@ dotnet build LifeTracker.slnx
 dotnet run --project Backend --launch-profile http     # http://localhost:5020; Scalar API docs at /scalar in Development
 dotnet ef migrations add <Name> --project Backend
 dotnet ef database update --project Backend
+```
+
+CLI (from repo root, with the backend running):
+```
+dotnet run --project CLI
 ```
 
 Tests:
@@ -60,6 +65,8 @@ dotnet user-secrets set "UsdaApiKey" "<key>" --project Backend
 - Adding a new nutrient touches: `Nutrients.cs`, the relevant model (`Macro`/`Mineral`/`Vitamin`) + migration, `NutrientDto`, `IngredientService.AddAsync`, and `MealService.CalculateNutrients`.
 
 **Frontend ↔ backend type sharing:** `Microsoft.Extensions.ApiDescription.Server` emits the OpenAPI document to `Backend/obj/Backend.json` on backend build. `npm run generate-types` turns that into `Frontend/src/types/api.ts` (generated — don't edit), and `src/types/index.ts` re-exports friendly aliases (`Dri`, `Meal`). After changing DTOs: build the backend, then regenerate types.
+
+**CLI** is a separate HTTP client, not a project reference to `Backend`. `Program.cs` reads `ApiBaseUrl` from `CLI/appsettings.json` (copied to the output directory), creates one `HttpClient`, and wires `IngredientService` (HTTP calls) into `TextUI` (menu, prompts, output). `CLI/DTOs` holds its own request/response classes with only the fields it uses. Input is validated in `TextUI` before sending (`ReadDecimal`, `ReadOptionalInt`, `ReadString`; decimals accept `,` or `.`). Meals can't be created from the CLI yet — use Scalar (`POST /api/meals`).
 
 **Frontend state:** `App.tsx` fetches `/api/dri` and `/api/meals` once on mount into a single `AppContext` (`useAppContext()`); components read from there. No router — it's a single view.
 
