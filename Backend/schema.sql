@@ -1,82 +1,117 @@
-CREATE TABLE Ingredient (
-    Id INT PRIMARY KEY IDENTITY(1, 1),
-    Energy DECIMAL(9, 2) NOT NULL,
-    Name NVARCHAR(255) NOT NULL,
-    Price DECIMAL(9, 2) NOT NULL,
-    Quantity DECIMAL(9, 2) NOT NULL
+﻿CREATE TABLE [Ingredients] (
+    [Id] int NOT NULL IDENTITY,
+    [Energy] decimal(19,8) NOT NULL,
+    [Name] nvarchar(255) NOT NULL,
+    [Price] decimal(19,8) NOT NULL,
+    [Quantity] decimal(19,8) NOT NULL,
+    [UsdaId] int NULL,
+    CONSTRAINT [PK_Ingredients] PRIMARY KEY ([Id])
 );
+GO
 
-CREATE TABLE Macro (
-    Id INT PRIMARY KEY IDENTITY(1, 1),
-    IngredientId INT NOT NULL UNIQUE,
-    AlphaLinolenicAcid DECIMAL(19, 8),
-    Carbohydrate DECIMAL(9, 2) NOT NULL,
-    Fat DECIMAL(9, 2) NOT NULL,
-    Fiber DECIMAL(9, 2) NOT NULL,
-    LinoleicAcid DECIMAL(19, 8),
-    Protein DECIMAL(9, 2) NOT NULL,
-    SaturatedFat DECIMAL(9, 2) NOT NULL,
-    Sugar DECIMAL(9, 2) NOT NULL,
 
-    FOREIGN KEY (IngredientId) REFERENCES Ingredient(Id)
+CREATE TABLE [Meals] (
+    [Id] int NOT NULL IDENTITY,
+    [Name] nvarchar(255) NOT NULL,
+    [Servings] int NOT NULL,
+    CONSTRAINT [PK_Meals] PRIMARY KEY ([Id])
 );
+GO
 
-CREATE TABLE Meal (
-    Id INT PRIMARY KEY IDENTITY(1, 1),
-    Name NVARCHAR(255) NOT NULL,
-    Servings INT NOT NULL
+
+CREATE TABLE [Macros] (
+    [Id] int NOT NULL IDENTITY,
+    [IngredientId] int NOT NULL,
+    [Carbohydrate] decimal(19,8) NOT NULL,
+    [Fat] decimal(19,8) NOT NULL,
+    [Fiber] decimal(19,8) NOT NULL,
+    [Protein] decimal(19,8) NOT NULL,
+    [SaturatedFat] decimal(19,8) NOT NULL,
+    [Sugar] decimal(19,8) NOT NULL,
+    [AlphaLinolenicAcid] decimal(19,8) NULL,
+    [LinoleicAcid] decimal(19,8) NULL,
+    CONSTRAINT [PK_Macros] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_Macros_Ingredients_IngredientId] FOREIGN KEY ([IngredientId]) REFERENCES [Ingredients] ([Id]) ON DELETE CASCADE
 );
+GO
 
-CREATE TABLE MealIngredient (
-    Id INT PRIMARY KEY IDENTITY(1, 1),
-    IngredientId INT NOT NULL,
-    MealId INT NOT NULL,
-    QuantityUsed DECIMAL(9, 2) NOT NULL,
 
-    FOREIGN KEY (IngredientId) REFERENCES Ingredient(Id),
-    FOREIGN KEY (MealId) REFERENCES Meal(Id),
-    UNIQUE (IngredientId, MealId)
+CREATE TABLE [Minerals] (
+    [Id] int NOT NULL IDENTITY,
+    [IngredientId] int NOT NULL,
+    [Chloride] decimal(19,8) NOT NULL,
+    [Sodium] decimal(19,8) NOT NULL,
+    [Calcium] decimal(19,8) NULL,
+    [Chromium] decimal(19,8) NULL,
+    [Copper] decimal(19,8) NULL,
+    [Fluoride] decimal(19,8) NULL,
+    [Iodine] decimal(19,8) NULL,
+    [Iron] decimal(19,8) NULL,
+    [Magnesium] decimal(19,8) NULL,
+    [Manganese] decimal(19,8) NULL,
+    [Molybdenum] decimal(19,8) NULL,
+    [Phosphorus] decimal(19,8) NULL,
+    [Potassium] decimal(19,8) NULL,
+    [Selenium] decimal(19,8) NULL,
+    [Zinc] decimal(19,8) NULL,
+    CONSTRAINT [PK_Minerals] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_Minerals_Ingredients_IngredientId] FOREIGN KEY ([IngredientId]) REFERENCES [Ingredients] ([Id]) ON DELETE CASCADE
 );
+GO
 
-CREATE TABLE Mineral (
-    Id INT PRIMARY KEY IDENTITY(1, 1),
-    IngredientId INT NOT NULL UNIQUE,
-    Calcium DECIMAL(19, 8),
-    Chloride DECIMAL(19, 8) NOT NULL,
-    Chromium DECIMAL(19, 8),
-    Copper DECIMAL(19, 8),
-    Fluoride DECIMAL(19, 8),
-    Iodine DECIMAL(19, 8),
-    Iron DECIMAL(19, 8),
-    Magnesium DECIMAL(19, 8),
-    Manganese DECIMAL(19, 8),
-    Molybdenum DECIMAL(19, 8),
-    Phosphorus DECIMAL(19, 8),
-    Potassium DECIMAL(19, 8),
-    Selenium DECIMAL(19, 8),
-    Sodium DECIMAL(19, 8) NOT NULL,
-    Zinc DECIMAL(19, 8),
 
-    FOREIGN KEY (IngredientId) REFERENCES Ingredient(Id)
+CREATE TABLE [Vitamins] (
+    [Id] int NOT NULL IDENTITY,
+    [IngredientId] int NOT NULL,
+    [Biotin] decimal(19,8) NULL,
+    [Choline] decimal(19,8) NULL,
+    [Folate] decimal(19,8) NULL,
+    [Niacin] decimal(19,8) NULL,
+    [PantothenicAcid] decimal(19,8) NULL,
+    [Riboflavin] decimal(19,8) NULL,
+    [Thiamin] decimal(19,8) NULL,
+    [VitaminA] decimal(19,8) NULL,
+    [VitaminB12] decimal(19,8) NULL,
+    [VitaminB6] decimal(19,8) NULL,
+    [VitaminC] decimal(19,8) NULL,
+    [VitaminD] decimal(19,8) NULL,
+    [VitaminE] decimal(19,8) NULL,
+    [VitaminK] decimal(19,8) NULL,
+    CONSTRAINT [PK_Vitamins] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_Vitamins_Ingredients_IngredientId] FOREIGN KEY ([IngredientId]) REFERENCES [Ingredients] ([Id]) ON DELETE CASCADE
 );
+GO
 
-CREATE TABLE Vitamin (
-    Id INT PRIMARY KEY IDENTITY(1, 1),
-    IngredientId INT NOT NULL UNIQUE,
-    Biotin DECIMAL(19, 8),
-    Choline DECIMAL(19, 8),
-    Folate DECIMAL(19, 8),
-    Niacin DECIMAL(19, 8),
-    PantothenicAcid DECIMAL(19, 8),
-    Riboflavin DECIMAL(19, 8),
-    Thiamin DECIMAL(19, 8),
-    VitaminA DECIMAL(19, 8),
-    VitaminB12 DECIMAL(19, 8),
-    VitaminB6 DECIMAL(19, 8),
-    VitaminC DECIMAL(19, 8),
-    VitaminD DECIMAL(19, 8),
-    VitaminE DECIMAL(19, 8),
-    VitaminK DECIMAL(19, 8),
 
-    FOREIGN KEY (IngredientId) REFERENCES Ingredient(Id)
+CREATE TABLE [MealIngredients] (
+    [Id] int NOT NULL IDENTITY,
+    [IngredientId] int NOT NULL,
+    [MealId] int NOT NULL,
+    [QuantityUsed] decimal(19,8) NOT NULL,
+    CONSTRAINT [PK_MealIngredients] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_MealIngredients_Ingredients_IngredientId] FOREIGN KEY ([IngredientId]) REFERENCES [Ingredients] ([Id]) ON DELETE CASCADE,
+    CONSTRAINT [FK_MealIngredients_Meals_MealId] FOREIGN KEY ([MealId]) REFERENCES [Meals] ([Id]) ON DELETE CASCADE
 );
+GO
+
+
+CREATE UNIQUE INDEX [IX_Macros_IngredientId] ON [Macros] ([IngredientId]);
+GO
+
+
+CREATE UNIQUE INDEX [IX_MealIngredients_IngredientId_MealId] ON [MealIngredients] ([IngredientId], [MealId]);
+GO
+
+
+CREATE INDEX [IX_MealIngredients_MealId] ON [MealIngredients] ([MealId]);
+GO
+
+
+CREATE UNIQUE INDEX [IX_Minerals_IngredientId] ON [Minerals] ([IngredientId]);
+GO
+
+
+CREATE UNIQUE INDEX [IX_Vitamins_IngredientId] ON [Vitamins] ([IngredientId]);
+GO
+
+
