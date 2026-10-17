@@ -23,6 +23,8 @@ public static class Nutrients
 
     public static readonly Nutrient AlphaLinolenicAcid = new() { Recommended = 1.6m, UsdaId = 1404, Name = "Alpha Linolenic Acid", Unit = Unit.Gram };
     public static readonly Nutrient LinoleicAcid = new() { Recommended = 17, UsdaId = 1316, Name = "Linoleic Acid", Unit = Unit.Gram };
+    public static readonly Nutrient Pufa182 = new() { UsdaId = 1269, Name = "PUFA 18:2", Unit = Unit.Gram };
+    public static readonly Nutrient Pufa183 = new() { UsdaId = 1270, Name = "PUFA 18:3", Unit = Unit.Gram };
 
     public static readonly Nutrient Chloride = new() { Recommended = 2300, UpperLimit = 3600, Name = "Chloride", Unit = Unit.Milligram };
     public static readonly Nutrient Sodium = new() { Recommended = 1500, UpperLimit = 2300, Name = "Sodium", Unit = Unit.Milligram };

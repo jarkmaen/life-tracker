@@ -40,11 +40,11 @@ public class IngredientService(AppDbContext context, IUsdaService usdaService) :
             UsdaId = dto.UsdaId,
             Macro = new Macro
             {
-                AlphaLinolenicAcid = FindNutrient(Nutrients.AlphaLinolenicAcid),
+                AlphaLinolenicAcid = FindNutrient(Nutrients.AlphaLinolenicAcid) ?? FindNutrient(Nutrients.Pufa183),
                 Carbohydrate = dto.Carbohydrate,
                 Fat = dto.Fat,
                 Fiber = dto.Fiber,
-                LinoleicAcid = FindNutrient(Nutrients.LinoleicAcid),
+                LinoleicAcid = FindNutrient(Nutrients.LinoleicAcid) ?? FindNutrient(Nutrients.Pufa182),
                 Protein = dto.Protein,
                 SaturatedFat = dto.SaturatedFat,
                 Sugar = dto.Sugar
