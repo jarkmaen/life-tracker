@@ -37,6 +37,7 @@ public class IngredientService(AppDbContext context, IUsdaService usdaService) :
             Name = dto.Name,
             Price = dto.Price,
             Quantity = dto.Quantity,
+            UsdaId = dto.UsdaId,
             Macro = new Macro
             {
                 AlphaLinolenicAcid = FindNutrient(Nutrients.AlphaLinolenicAcid),

@@ -265,11 +265,13 @@ export interface components {
             id?: number;
             /** Format: double */
             energy?: number;
-            name?: string;
+            name: string;
             /** Format: double */
             price?: number;
             /** Format: double */
             quantity?: number;
+            /** Format: int32 */
+            usdaId?: null | number;
             macro?: components["schemas"]["Macro"];
             mineral?: components["schemas"]["Mineral"];
             vitamin?: components["schemas"]["Vitamin"];

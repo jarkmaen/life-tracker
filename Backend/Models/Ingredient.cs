@@ -13,6 +13,7 @@ public class Ingredient
 
     public decimal Price { get; set; }
     public decimal Quantity { get; set; }
+    public int? UsdaId { get; set; }
 
     public Macro Macro { get; set; } = null!;
     public Mineral Mineral { get; set; } = null!;

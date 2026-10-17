@@ -46,6 +46,9 @@ namespace Backend.Migrations
                         .HasPrecision(19, 8)
                         .HasColumnType("decimal(19,8)");
 
+                    b.Property<int?>("UsdaId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("Ingredients");
