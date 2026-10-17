@@ -11,7 +11,7 @@ public class TextUI(IngredientService ingredientService)
         while (true)
         {
             Console.Clear();
-            Console.WriteLine("nutrient tracker");
+            Console.WriteLine("nutrient calculator");
             Console.WriteLine();
             Console.WriteLine("1. add ingredient");
             Console.WriteLine("2. list ingredients");
@@ -39,7 +39,7 @@ public class TextUI(IngredientService ingredientService)
     private async Task AddIngredientAsync()
     {
         Console.Clear();
-        Console.WriteLine("nutrient tracker > add ingredient");
+        Console.WriteLine("nutrient calculator > add ingredient");
         Console.WriteLine();
 
         int? usdaId = ReadOptionalInt("usda id  : ");
@@ -95,7 +95,7 @@ public class TextUI(IngredientService ingredientService)
     private async Task ListIngredientsAsync()
     {
         Console.Clear();
-        Console.WriteLine("nutrient tracker > list ingredients");
+        Console.WriteLine("nutrient calculator > list ingredients");
         Console.WriteLine();
 
         try
